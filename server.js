@@ -3,8 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb+srv://rey:yyx71618@movedin-product-gvwwu.mongodb.net/test?retryWrites=true');
-var Product = require('./model/product');
-var Wishlist = require('./model/wishlist');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
