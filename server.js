@@ -15,6 +15,7 @@ app.use(morgan('dev'));
 
 
 //Routes
+app.use('/users', require('./routes/users'));
 
 
 
