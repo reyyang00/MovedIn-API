@@ -1,14 +1,24 @@
 var express = require('express');
+var morgan = require('morgan');
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var db = mongoose.connect('mongodb+srv://rey:yyx71618@movedin-product-gvwwu.mongodb.net/test?retryWrites=true');
 
 
+
+//Middlerwares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(morgan('dev'));
 
 
+
+//Routes
+
+
+
+//API
 app.get('/', function(request, response){
     response.send("Hello MovedIn");
 })
@@ -22,6 +32,9 @@ app.post('/product',function(request,response){
         }
     });
 })
+
+
+//starts the server
 app.listen(3000, function(){
     console.log("MovedIn api created");
 });
