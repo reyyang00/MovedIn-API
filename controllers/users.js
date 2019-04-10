@@ -12,20 +12,24 @@ signToken = (user) => {
 }
 module.exports = {
     signUp: async (req, res, next) => {
-        // get user's input Email & Paswword
-        console.log('contents of req.value.body', req.body);
-        console.log('UserController.signUp() called!');
+        // get user's input Email & Paswword  
         var { email, password } = req.body;
 
 
         // check if there is a user with the same email
-        var foundUser = await User.findOne({ email });
+        var foundUser = await User.findOne({ "local.email": email });
         if (foundUser) {
             return res.status(403).json({ error: 'Email is already existed' });
         }
 
         //create a new user
-        var newUser = new User({ email, password });
+        var newUser = new User({
+            method: 'local',
+            local: {
+                email: email,
+                password: password
+            }
+        });
         await newUser.save();
 
 
@@ -41,6 +45,20 @@ module.exports = {
         //generate token
         var token = signToken(req.user)
         console.log('Successful login!');
+        res.status(200).json({ token });
+    },
+
+    googleOAuth: async (req, res, next) => {
+        var token = signToken(req.user)
+        console.log('req.user', req.user);
+        res.status(200).json({ token });
+    },
+
+
+    facebookOAuth: async (req, res, next) => {
+        console.log('Facebook Successful login!');
+        var token = signToken(req.user)
+        console.log('req.user', req.user);
         res.status(200).json({ token });
     },
 

@@ -6,6 +6,8 @@ var passport = require('passport');
 var passportConf = require('../passport');
 var passportSignIn = passport.authenticate('local', { session: false });
 var passportJWT = passport.authenticate('jwt', { session: false });
+var passportGoogle = passport.authenticate('googleToken', { session: false });
+var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 
 //restful APIs
@@ -14,6 +16,12 @@ router.route('/signup')
 
 router.route('/signin')
     .post(validateBody(schemas.authSchema), passportSignIn, UserController.signIn);
+
+router.route('/oauth/google')
+    .post(passportGoogle, UserController.googleOAuth);
+
+router.route('/oauth/facebook')
+    .post(facebookToken, UserController.facebookOAuth);
 
 router.route('/secret')
     .get(passportJWT, UserController.secret);
