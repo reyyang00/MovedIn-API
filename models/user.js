@@ -2,6 +2,21 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 var Schema = mongoose.Schema;
 
+//create a UserProfile schema-- 10/29 by Angela
+var userProSchema= new Schema({
+   nameToDisplay:{
+      type:String,
+      required:true,
+   },
+
+    city:{
+      type:String,
+      required:true,
+    },
+});
+
+
+
 //create a schema
 var userScheme = new Schema({
     method: {
@@ -75,5 +90,15 @@ userScheme.methods.isValidPassword = async function (newPassword) {
 
 //create a model
 var User = mongoose.model('user', userScheme);
+var UserPro=mongoose.model('userPro',userProSchema);
 //export the model
-module.exports = User;
+
+//module.exports =UserPro;
+
+var constants = {
+    UserModel : mongoose.model('user', userScheme),
+    UserProModel: mongoose.model('userPro',userProSchema),
+};
+
+module.exports =
+        Object.freeze(constants);
