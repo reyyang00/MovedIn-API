@@ -10,6 +10,7 @@ var passportGoogle = passport.authenticate('googleToken', { session: false });
 var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 
+
 //restful APIs
 router.route('/addUserPro')
     .post(UserController.updateUserPro);
@@ -39,7 +40,17 @@ router.route('/secret')
 // below two APIs can be called after user being authenticated
 router.route('/getrooms') 
     .get(passportJWT, UserController.secret);
+router.route('/getrooms') 
+    .post(passportJWT, UserController.secret);
+router.route('/getrooms') 
+    .(passportJWT, UserController.secret);
 
+
+
+
+
+
+//roomates api
 router.route('/getroommates')
     .get(passportJWT, UserController.secret);
 
