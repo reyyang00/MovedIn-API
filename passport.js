@@ -5,7 +5,7 @@ var JwTstrategy = require('passport-jwt').Strategy;
 var LocalStorage = require('passport-local').Strategy;
 var { ExtractJwt } = require('passport-jwt');
 var { JWS_SECRET } = require('./configuration');
-var User = require('./models/user');
+var constants = require('./models/user');
 var config = require('./configuration/index');
 
 //JSON WEB TOKENS STRATEGY
@@ -15,7 +15,7 @@ passport.use(new JwTstrategy({
 }, async (payload, done) => {
     try {
         // Find the user specified in token
-        var user = await User.findById(payload.sub);
+        var user = await constants.UserModel.findById(payload.sub);
 
 
         //If user doesn't exists, handle it
@@ -23,7 +23,7 @@ passport.use(new JwTstrategy({
             return done(null, false);
         }
 
-        //otherwise, return the user 
+        //otherwise, return the user
         done(null, user);
 
         //req.user
@@ -41,7 +41,7 @@ passport.use(new LocalStorage({
         console.log('email', email);
 
         //Find the user given the email
-        var user = await User.findOne({ "local.email": email });
+        var user = await constants.UserModel.findOne({ "local.email": email });
 
         //if not, handler it
         if (!user) {
@@ -74,7 +74,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
         console.log('profile', profile);
 
         //check whether this current user exists in our DB
-        var existringUser = await User.findOne({ "google.id": profile.id });
+        var existringUser = await constants.UserModel.findOne({ "google.id": profile.id });
         if (existringUser) {
             console.log('User already exists in our DB');
             return done(null, existringUser);
@@ -84,7 +84,7 @@ passport.use('googleToken', new GooglePlusTokenStrategy({
 
 
         //If new account
-        var newUser = new User({
+        var newUser = new constants.UserModel({
             method: 'google',
             google: {
                 id: profile.id,
@@ -113,27 +113,27 @@ passport.use('facebookToken', new FacebookTokenStrategy({
         console.log('profile',profile);
 
          //check whether this current user exists in our DB
-         var existringUser = await User.findOne({ "facebook.id": profile.id });
+         var existringUser = await constants.UserModel.findOne({ "facebook.id": profile.id });
          if (existringUser) {
              console.log('User already exists in our DB');
              return done(null, existringUser);
          }
- 
+
          console.log('User does not exist in our DB, we are creating a new one ');
- 
- 
+
+
          //If new account
-         var newUser = new User({
+         var newUser = new constants.UserModel({
              method: 'facebook',
              facebook: {
                  id: profile.id,
                  email: profile.emails[0].value
              }
          });
- 
+
          await newUser.save();
          done(null, newUser);
-        
+
 
     } catch (error) {
         done(error, false, error.message);

@@ -41,10 +41,10 @@ router.route('/secret')
 // below two APIs can be called after user being authenticated
 router.route('/getrooms')
     .get(passportJWT, UserController.secret);
-router.route('/getrooms') 
+router.route('/getrooms')
     .post(passportJWT, UserController.secret);
-router.route('/getrooms') 
-    .(passportJWT, UserController.secret);
+// router.route('/getrooms')
+//     .post(passportJWT, UserController.secret);
 
 
 
