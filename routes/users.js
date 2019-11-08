@@ -18,8 +18,9 @@ router.route('/addUserPro')
 router.route('/signup')
     .post(validateBody(schemas.authSchema), UserController.signUp);
 
+router.route('/homePage')
+  .post(UserController.getAllUserInfo);
 
-// these are public APIs
 router.route('/signin')
     .post(validateBody(schemas.authSchema), passportSignIn, UserController.signIn);
 
@@ -38,7 +39,7 @@ router.route('/secret')
 
 
 // below two APIs can be called after user being authenticated
-router.route('/getrooms') 
+router.route('/getrooms')
     .get(passportJWT, UserController.secret);
 router.route('/getrooms') 
     .post(passportJWT, UserController.secret);
