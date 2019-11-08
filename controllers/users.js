@@ -18,6 +18,11 @@ module.exports = {
 
           var{nameToDisplay, city} = req.body;
 
+          var foundExistingName =await constants.UserProModel.findOne({"nameToDisplay":nameToDisplay});
+          if(foundExistingName){
+            return res.send('nameToDisplay is already existed');
+          }
+
           var newUserPro= new constants.UserProModel({
               nameToDisplay: nameToDisplay,
               city:city,
@@ -25,6 +30,15 @@ module.exports = {
           console.log(newUserPro);
           await newUserPro.save();
           res.send('Successful updateUserPro!');
+    },
+
+    getAllUserInfo: async (req,res,next)=>{
+
+       var allusers= await constants.UserProModel.find({});
+
+       res.status(200).json({allusers});
+
+
     },
 
     signUp: async (req, res, next) => {

@@ -17,7 +17,8 @@ router.route('/addUserPro')
 router.route('/signup')
     .post(validateBody(schemas.authSchema), UserController.signUp);
 
-
+router.route('/homePage')
+  .post(UserController.getAllUserInfo);
 
 router.route('/signin')
     .post(validateBody(schemas.authSchema), passportSignIn, UserController.signIn);
