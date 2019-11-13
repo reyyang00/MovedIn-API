@@ -14,32 +14,33 @@ signToken = (user) => {
 }
 module.exports = {
 
-    updateUserPro: async (req,res,next) =>{
+    // updateUserPro: async (req,res,next) =>{
 
-          var{nameToDisplay, city} = req.body;
+    //       var{nameToDisplay, city} = req.body;
 
-          var foundExistingName =await constants.UserProModel.findOne({"nameToDisplay":nameToDisplay});
-          if(foundExistingName){
-            return res.send('nameToDisplay is already existed');
-          }
+    //       var foundExistingName =await constants.UserProModel.findOne({"nameToDisplay":nameToDisplay});
+    //       if(foundExistingName){
+    //         return res.send('nameToDisplay is already existed');
+    //       }
 
-          var newUserPro= new constants.UserProModel({
-              nameToDisplay: nameToDisplay,
-              city:city,
-          });
-          console.log(newUserPro);
-          await newUserPro.save();
-          res.send('Successful updateUserPro!');
-    },
+    //       var newUserPro= new constants.UserProModel({
+    //           nameToDisplay: nameToDisplay,
+    //           city:city,
+    //       });
+    //       console.log(newUserPro);
+    //       await newUserPro.save();
+    //       res.send('Successful updateUserPro!');
+    // },
 
-    getAllUserInfo: async (req,res,next)=>{
+    
+    // getAllUserInfo: async (req,res,next)=>{
 
-       var allusers= await constants.UserProModel.find({});
+    //    var allusers= await constants.UserProModel.find({});
 
-       res.status(200).json({allusers});
+    //    res.status(200).json({allusers});
 
 
-    },
+    // },
 
     signUp: async (req, res, next) => {
             // get user's input Email & Paswword

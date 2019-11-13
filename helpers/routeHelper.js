@@ -20,6 +20,15 @@ module.exports = {
         authSchema: Joi.object().keys({
             email: Joi.string().email().required(),
             password: Joi.string().required()
+        }),
+
+        roomSchema: Joi.object.keys({
+              price: Joi.number().required(),
+              location: Joi.string().required(),
+              furniture: Joi.boolean(),
+              minLeaseDuration: Joi.number().required(),
+              wifi: Joi.boolean(),
+              capacity: Joi.number()   
         })
     }
 }

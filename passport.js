@@ -38,6 +38,8 @@ passport.use(new LocalStorage({
 
 }, async (email, password, done) => {
     try {
+
+        
         console.log('email', email);
 
         //Find the user given the email
@@ -108,32 +110,32 @@ passport.use('facebookToken', new FacebookTokenStrategy({
 
     console.log('called!');
     try {
-        console.log('accessToken',accessToken);
-        console.log('refreshToken',refreshToken);
-        console.log('profile',profile);
+        console.log('accessToken', accessToken);
+        console.log('refreshToken', refreshToken);
+        console.log('profile', profile);
 
-         //check whether this current user exists in our DB
-         var existringUser = await User.findOne({ "facebook.id": profile.id });
-         if (existringUser) {
-             console.log('User already exists in our DB');
-             return done(null, existringUser);
-         }
- 
-         console.log('User does not exist in our DB, we are creating a new one ');
- 
- 
-         //If new account
-         var newUser = new User({
-             method: 'facebook',
-             facebook: {
-                 id: profile.id,
-                 email: profile.emails[0].value
-             }
-         });
- 
-         await newUser.save();
-         done(null, newUser);
-        
+        //check whether this current user exists in our DB
+        var existringUser = await User.findOne({ "facebook.id": profile.id });
+        if (existringUser) {
+            console.log('User already exists in our DB');
+            return done(null, existringUser);
+        }
+
+        console.log('User does not exist in our DB, we are creating a new one ');
+
+
+        //If new account
+        var newUser = new User({
+            method: 'facebook',
+            facebook: {
+                id: profile.id,
+                email: profile.emails[0].value
+            }
+        });
+
+        await newUser.save();
+        done(null, newUser);
+
 
     } catch (error) {
         done(error, false, error.message);
