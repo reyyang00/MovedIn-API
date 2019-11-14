@@ -22,13 +22,16 @@ module.exports = {
             password: Joi.string().required()
         }),
 
-        roomSchema: Joi.object.keys({
-              price: Joi.number().required(),
-              location: Joi.string().required(),
-              furniture: Joi.boolean(),
-              minLeaseDuration: Joi.number().required(),
-              wifi: Joi.boolean(),
-              capacity: Joi.number()   
+        roomSchema: Joi.object().keys({
+            price: Joi.number().required(),
+            location: Joi.string().required(),
+            furniture: Joi.boolean(),
+            minLeaseDuration: Joi.number().required(),
+            wifi: Joi.boolean(),
+            capacity: Joi.number()
+        }),
+        getRoomSchema: Joi.object().keys({
+            location: Joi.string().required()
         })
     }
 }

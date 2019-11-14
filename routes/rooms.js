@@ -1,6 +1,6 @@
 var express = require('express');
 var router = require('express-promise-router')();
-var UserController = require('../controllers/users');
+var RoomController = require('../controllers/rooms');
 var { validateBody, schemas } = require('../helpers/routeHelper');
 var passport = require('passport');
 var passportConf = require('../passport');
@@ -11,8 +11,14 @@ var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 
 // below two APIs can be called after user being authenticated
+router.route('/creatroom')
+    .post(validateBody(schemas.roomSchema), RoomController.createRoom);
+
 router.route('/getrooms')
-    .post(validateBody(schemas.roomSchema), UserController.signUp);
+    .get(RoomController.getAllRoomsWithoutAuthenticated);
+
+router.route('/gettheroom')
+    .get(RoomController.getTheRoomsAfterAuthenticated);
 
 
 
