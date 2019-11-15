@@ -5,6 +5,8 @@ module.exports = {
     validateBody: (schema) => {
         return (req, res, next) => {
             var result = Joi.validate(req.body, schema);
+            JSON.stringify(req.body);
+            console.log(req.body);
             if (result.error) {
                 // console.log(req.header);
                 // console.log(req.body);
