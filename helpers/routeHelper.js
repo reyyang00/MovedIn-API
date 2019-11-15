@@ -1,5 +1,4 @@
 // joi is a freawork to valide the data before calling APIs
-
 var Joi = require('joi');
 
 module.exports = {
@@ -7,6 +6,9 @@ module.exports = {
         return (req, res, next) => {
             var result = Joi.validate(req.body, schema);
             if (result.error) {
+                // console.log(req.header);
+                // console.log(req.body);
+                console.log('hello');
                 return res.status(400).json(result.error);
             }
             if (!req.value) { req.valaue = {}; }

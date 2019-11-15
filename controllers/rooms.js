@@ -46,15 +46,16 @@ module.exports = {
     },
     getTheRoomsAfterAuthenticated: async (req, res, next) => {
         // get user's input room location
-        var { location } = req.body;
+        var id = req.query.id;
+        console.log(id);
 
-        var theRoom = {};
+        //var theRoom = {};
 
-        theRoom = await roomModel.find({ "location": location });
+        // theRoom = await roomModel.find({ "location": location });
 
-        var messge = "hello";
+        // var messge = "hello";
         //Respond with token
-        res.status(200).json({ location });
+        res.status(200).json({ id });
 
     },
 

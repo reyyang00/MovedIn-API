@@ -12,15 +12,14 @@ var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 // below two APIs can be called after user being authenticated
 router.route('/creatroom')
-    .post(validateBody(schemas.roomSchema), RoomController.createRoom);
+    .post(passportJWT, validateBody(schemas.roomSchema), RoomController.createRoom);
+
 
 router.route('/getrooms')
     .get(RoomController.getAllRoomsWithoutAuthenticated);
 
+
 router.route('/gettheroom')
-    .get(RoomController.getTheRoomsAfterAuthenticated);
-
-
-
+    .get(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
 
 module.exports = router;

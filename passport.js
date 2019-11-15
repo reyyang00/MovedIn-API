@@ -15,6 +15,7 @@ passport.use(new JwTstrategy({
 }, async (payload, done) => {
     try {
         // Find the user specified in token
+        // payload.sub = user ID in our mongoDB
         var user = await User.findById(payload.sub);
 
 
