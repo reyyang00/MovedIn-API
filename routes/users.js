@@ -12,6 +12,9 @@ var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 
 //restful APIs
+router.route('/getUserPro')
+   .post(UserController.getUserPro);
+
 router.route('/addUserPro')
     .post(UserController.updateUserPro);
 

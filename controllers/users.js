@@ -14,27 +14,50 @@ signToken = (user) => {
 }
 module.exports = {
 
+    getUserPro: async (req,res,next)=>{
+       var {userEmail}= req.body;
+       var user = await constants.UserProModel.findOne({"email":userEmail});
+       if(!user){return res.json({ error: "You Haven't set up your User Profile yet" });
+       }
+       res.status(200).json({user});
+
+    },
+
     updateUserPro: async (req,res,next) =>{
 
-          var{nameToDisplay, city} = req.body;
+          var{nameToDisplay, city, state,occupation, gender,budget,roomtype,role,email} = req.body;
+          // console.log(user);
+          var foundUserProfile =await constants.UserProModel.findOne({"email":email});
+          console.log(foundUserProfile);
+          if(foundUserProfile){
+              await constants.UserProModel.deleteOne({email:email});
+              res.send('userprofile found!');
 
-          var foundExistingName =await constants.UserProModel.findOne({"nameToDisplay":nameToDisplay});
-          if(foundExistingName){
-            return res.send('nameToDisplay is already existed');
           }
 
           var newUserPro= new constants.UserProModel({
               nameToDisplay: nameToDisplay,
               city:city,
+              state:state,
+              occupation:occupation,
+              gender:gender,
+              budget:budget,
+              roomtype:roomtype,
+              role:role,
+              email:email
           });
-          console.log(newUserPro);
+          // console.log(user);
           await newUserPro.save();
-          res.send('Successful updateUserPro!');
+
     },
 
     getAllUserInfo: async (req,res,next)=>{
 
-       var allusers= await constants.UserProModel.find({});
+       var {email} = req.body;
+       var currentUser = await constants.UserProModel.findOne({"email":email});
+       var city = currentUser.city;
+       var state = currentUser.state;
+       var allusers= await constants.UserProModel.find({"city":city,"state":state});
 
        res.status(200).json({allusers});
 
