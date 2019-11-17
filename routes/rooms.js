@@ -21,5 +21,9 @@ router.route('/getrooms')
 
 router.route('/gettheroom')
     .get(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
+router.route('/deletetheroom')
+    .delete(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
+
+
 
 module.exports = router;
