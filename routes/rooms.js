@@ -10,17 +10,20 @@ var passportGoogle = passport.authenticate('googleToken', { session: false });
 var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 
-// below two APIs can be called after user being authenticated
+// the POST API for creating a room into our mongoDB
 router.route('/creatroom')
     .post(passportJWT, validateBody(schemas.roomSchema), RoomController.createRoom);
 
 
+// the GET API for get all the rooms
 router.route('/getrooms')
     .get(RoomController.getAllRoomsWithoutAuthenticated);
 
-
+//  GET API for get the room's details
 router.route('/gettheroom')
     .get(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
+
+//  DELETE API for delete a room document from mongoDB 
 router.route('/deletetheroom')
     .delete(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
 

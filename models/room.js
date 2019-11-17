@@ -15,7 +15,8 @@ var roomSchema = new Schema({
     furniture: Boolean,
     minLeaseDuration: Number,
     wifi: Boolean,
-    capacity: Number
+    capacity: Number,
+    user_id: String
 });
 
 
