@@ -34,6 +34,7 @@ module.exports = {
             wifi: Joi.boolean(),
             capacity: Joi.number(),
             token: [Joi.string(), Joi.number()]
+
         }),
         getRoomSchema: Joi.object().keys({
             location: Joi.string().required()

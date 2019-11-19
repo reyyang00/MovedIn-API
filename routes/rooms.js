@@ -25,7 +25,7 @@ router.route('/gettheroom')
 
 //  DELETE API for delete a room document from mongoDB 
 router.route('/deletetheroom')
-    .delete(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
+    .delete(passportJWT, RoomController.deleteTheRoomBeingAuthenticated);
 
 
 
