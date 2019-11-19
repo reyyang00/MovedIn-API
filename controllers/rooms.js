@@ -51,18 +51,29 @@ module.exports = {
 
     // 
     getTheRoomsAfterAuthenticated: async (req, res, next) => {
-        // get user's input room location
-        var id = req.query.id;
-        console.log(id);
+        // get token from request header
+        var token = req.headers.authorization;
+        console.log('token is: ', req.headers.authorization);
 
-        //var theRoom = {};
+        //decode the token to get the user's id
+        var decoded = jwtDecode(token);
+        console.log('user id: ', decoded.sub);
+        var user_id = decoded.sub;
 
-        // theRoom = await roomModel.find({ "location": location });
+        // get the room id for the details of this room
+        var room_id = req.headers.room_id;
+        console.log(room_id);
 
-        // var messge = "hello";
-        //Respond with token
-        res.status(200).json({ id });
 
+        var room = await Room.findById(room_id);
+
+        //If user doesn't match the room's user_id, handle it
+        var message = '';
+        if (room.user_id !== user_id) {
+            message = 'No authtization to access to this room detail';
+        } else {
+            res.status(200).json({ room });
+        }
     },
 
     deleteTheRoomBeingAuthenticated: async (req, res, next) => {
