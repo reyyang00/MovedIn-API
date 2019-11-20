@@ -75,3 +75,7 @@ var roommateSchema = new Schema({
         required: true
     },
 });
+
+
+var Roommate = mongoose.model('roommate', roommateSchema);
+module.exports = Roommate;

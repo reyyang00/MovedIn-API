@@ -12,10 +12,13 @@ var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 // the POST API for creating a room into our mongoDB
 router.route('/creatroommate')
-    .post(passportJWT, validateBody(schemas.roomSchema), RoomController.createRoom);
+    .post(passportJWT, validateBody(schemas.roommateSchema), RoomController.createRoommate);
 
 
-// the GET API for get all the rooms
+
+
+
+// the GET API for get all the rooms without the Token 
 router.route('/getroommates')
     .get(RoomController.getAllRoomsWithoutAuthenticated);
 
