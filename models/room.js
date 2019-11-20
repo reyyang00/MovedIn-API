@@ -7,8 +7,16 @@ var roomSchema = new Schema({
         type: Number,
         required: true
     },
+    gender_prefered: {
+        type: String,
+        required: true
+    },
+    home_type: {
+        type: String,
+        required: true
+    },
 
-    location: {
+    city: {
         type: String,
         required: true
     },
@@ -40,7 +48,7 @@ var roomSchema = new Schema({
         type: Boolean,
         required: true
     },
-    bathrrom: {
+    bathroom: {
         type: Boolean,
         required: true
     },

@@ -28,11 +28,20 @@ module.exports = {
 
         roomSchema: Joi.object().keys({
             price: Joi.number().required(),
-            location: Joi.string().required(),
-            furniture: Joi.boolean(),
-            minLeaseDuration: Joi.number().required(),
-            wifi: Joi.boolean(),
-            capacity: Joi.number(),
+            gender_prefered: Joi.string().required(),
+            home_type: Joi.string().required(),
+            city: Joi.string().required(),
+            utility: Joi.boolean().required(),
+            cooking: Joi.boolean().required(),
+            pet: Joi.boolean().required(),
+            party: Joi.boolean().required(),
+            smoking: Joi.boolean().required(),
+            parking: Joi.boolean().required(),
+            funiture: Joi.boolean().required(),
+            bathroom: Joi.boolean().required(),
+            walk_in_closet: Joi.boolean().required(),
+            lease_term: Joi.boolean().required(),
+            move_in_date: Joi.boolean().required(),
             token: [Joi.string(), Joi.number()]
 
         }),
@@ -57,15 +66,7 @@ module.exports = {
             smoking: Joi.string().required(),
             party: Joi.boolean().required(),
             capacity: Joi.number().required(),
-
-
-
-
-
-
-
             token: [Joi.string(), Joi.number()]
-
         }),
 
 
