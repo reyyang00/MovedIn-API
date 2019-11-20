@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 //Routes
 app.use('/users', require('./routes/users'));
 app.use('/rooms', require('./routes/rooms'));
+app.use('/roommates', require('./routes/roommates'));
 
 
 

@@ -59,11 +59,12 @@ module.exports = {
             budget: Joi.number().required(),
             room_type: Joi.string().required(),
             parking: Joi.boolean().required(),
+            moved_in_date: Joi.string().required(),
             lease_term: Joi.string().required(),
             share_bathroom: Joi.boolean().required(),
             share_bedroom: Joi.boolean().required(),
             pet: Joi.boolean().required(),
-            smoking: Joi.string().required(),
+            smoking: Joi.boolean().required(),
             party: Joi.boolean().required(),
             capacity: Joi.number().required(),
             token: [Joi.string(), Joi.number()]

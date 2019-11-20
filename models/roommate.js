@@ -38,7 +38,7 @@ var roommateSchema = new Schema({
         type: String,
         required: true
     },
-    partking: {
+    parking: {
         type: Boolean,
         required: true
     },
@@ -72,6 +72,10 @@ var roommateSchema = new Schema({
     },
     capacity: {
         type: Number,
+        required: true
+    },
+    user_id: {
+        type: String,
         required: true
     },
 });

@@ -5,30 +5,40 @@ module.exports = {
 
     createRoommate: async (req, res, next) => {
         // get user's input Email & Paswword
-        var { price, location, furniture, minLeaseDuration, wifi, capacity, token } = req.body;
+        var { first_name, last_name, city, occupation, gender, age, budget, room_type, parking, moved_in_date, lease_term, share_bathroom, share_bedroom, pet, smoking, party, capacity, token } = req.body;
 
 
         var decoded = jwtDecode(token);
         console.log(decoded.sub);
         var user_id = decoded.sub;
         //create a new user
-        var newRoom = new Room({
-            price: price,
-            location: location,
-            furniture: furniture,
-            minLeaseDuration: minLeaseDuration,
-            wifi: wifi,
+        var newRoommate = new Roommate({
+            first_name: first_name,
+            last_name: last_name,
+            city: city,
+            occupation: occupation,
+            gender: gender,
+            age: age,
+            budget: budget,
+            room_type: room_type,
+            parking: parking,
+            moved_in_date: moved_in_date,
+            lease_term: lease_term,
+            share_bathroom: share_bathroom,
+            share_bedroom: share_bedroom,
+            pet: pet,
+            smoking: smoking,
+            party: party,
             capacity: capacity,
             user_id: user_id
         });
-        await newRoom.save();
+        await newRoommate.save();
 
 
         //Generate the token
-        var message = "room create successful";
+        var message = "roommate create successful";
         //Respond with token
         res.status(200).json({ message });
-
     },
 
     getAllRoommatesWithoutAuthenticated: async (req, res, next) => {
@@ -36,17 +46,18 @@ module.exports = {
         var { location } = req.body;
 
 
-        var allRoomsWithinLocation = {};
+        var allRoommatesWithinLocation = {};
         // if user input location then search by location
         if (location === "") {
-            allRoomsWithinLocation = await Room.find();
+            allRoomsWithinLocation = await Roommate.find();
         } else {
-            allRoomsWithinLocation = await Room.find({ "location": location });
+            allRoomsWithinLocation = await Roommate.find({ "location": location }).select('_id first_name last_name city budget');
         }
+
+
 
         //Respond with token
         res.status(200).json({ allRoomsWithinLocation });
-
     },
 
     // 
@@ -61,22 +72,22 @@ module.exports = {
         var user_id = decoded.sub;
 
         // get the room id for the details of this room
-        var room_id = req.headers.room_id;
-        console.log(room_id);
+        var roommate_id = req.headers.roommate_id;
+        console.log(roommate_id);
 
 
-        var room = await Room.findById(room_id);
+        var roommate = await Roommate.findById(roommate_id);
 
         //If user doesn't match the room's user_id, handle it
         var message = '';
-        if (room.user_id !== user_id) {
+        if (roommate.user_id !== user_id) {
             message = 'No authtization to access to this room detail';
         } else {
-            res.status(200).json({ room });
+            res.status(200).json({ roommate });
         }
     },
 
-    deleteTheRoomBeingAuthenticated: async (req, res, next) => {
+    deleteTheRoommateBeingAuthenticated: async (req, res, next) => {
 
         // get the user id by decode the token
         var token = req.headers.authorization;
@@ -87,19 +98,19 @@ module.exports = {
 
         //get the target room id to delete
 
-        var room_id = req.headers.room_id;
-        console.log(room_id);
+        var roommate_id = req.headers.roommate_id;
+        console.log(roommate_id);
 
         // find if the target room is belong's to the current user, if it is then delete no handler it.
-        var room = await Room.findById(room_id);
+        var roommate = await Roommate.findById(roommate_id);
 
         //If user doesn't match the room's user_id, handle it
         var message = '';
-        if (room.user_id !== user_id) {
+        if (roommate.user_id !== user_id) {
             message = 'the room does not belong to you'
         } else {
 
-            Room.deleteOne({ "_id": room_id }, function (err) { });
+            Roommate.deleteOne({ "_id": roommate_id }, function (err) { });
             message = 'delete successfully'
         }
         res.status(200).json({ message });

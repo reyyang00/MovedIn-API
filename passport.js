@@ -19,11 +19,13 @@ passport.use(new JwTstrategy({
         var user = await User.findById(payload.sub);
 
 
+
         //If user doesn't exists, handle it
         if (!user) {
             return done(null, false);
         }
 
+        console.log(user);
         //otherwise, return the user 
         done(null, user);
 
@@ -40,7 +42,7 @@ passport.use(new LocalStorage({
 }, async (email, password, done) => {
     try {
 
-        
+
         console.log('email', email);
 
         //Find the user given the email
