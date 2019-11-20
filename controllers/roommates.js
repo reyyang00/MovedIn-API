@@ -49,9 +49,9 @@ module.exports = {
         var allRoommatesWithinLocation = {};
         // if user input location then search by location
         if (location === "") {
-            allRoomsWithinLocation = await Roommate.find();
+            allRoommatesWithinLocation = await Roommate.find();
         } else {
-            allRoomsWithinLocation = await Roommate.find({ "location": location }).select('_id first_name last_name city budget');
+            allRoommatesWithinLocation = await Roommate.find({ "location": location }).select('_id first_name last_name city budget');
         }
 
 
@@ -71,7 +71,7 @@ module.exports = {
         console.log('user id: ', decoded.sub);
         var user_id = decoded.sub;
 
-        // get the room id for the details of this room
+        // get the roommate id for the details of this room
         var roommate_id = req.headers.roommate_id;
         console.log(roommate_id);
 
