@@ -13,7 +13,10 @@ var db = mongoose.connect(url, { useNewUrlParser: true });
 
 
 //Middlerwares
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+}));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
