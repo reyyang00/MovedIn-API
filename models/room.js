@@ -7,11 +7,15 @@ var roomSchema = new Schema({
         type: Number,
         required: true
     },
+    price_range: {
+        type: String,
+    },
+
     gender_prefered: {
         type: String,
         required: true
     },
-    home_type: {
+    room_type: {
         type: String,
         required: true
     },
@@ -20,51 +24,50 @@ var roomSchema = new Schema({
         type: String,
         required: true
     },
-    utility: {
-        type: Boolean,
+    utility_include: {
+        type: String,
         required: true
     },
     cooking: {
-        type: Boolean,
+        type: String,
         required: true
     },
     pet: {
-        type: Boolean,
+        type: String,
         required: true
     },
     party: {
-        type: Boolean,
+        type: String,
         required: true
     },
     smoking: {
-        type: Boolean,
+        type: String,
         required: true
     },
     parking: {
-        type: Boolean,
+        type: String,
         required: true
     },
     furniture: {
-        type: Boolean,
+        type: String,
         required: true
     },
     bathroom: {
-        type: Boolean,
+        type: String,
         required: true
     },
-    walk_in_closet: {
-        type: Boolean,
-        required: true
-    },
-    lease_term: {
-        type: Number,
+    min_lease_duration: {
+        type: String,
         required: true
     },
     move_in_date: {
         type: String,
         required: true
     },
-    user_id: String
+    user_id: {
+        type: String,
+        required: true
+    }
 });
 
 

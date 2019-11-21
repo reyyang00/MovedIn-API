@@ -5,7 +5,7 @@ module.exports = {
 
     createRoommate: async (req, res, next) => {
         // get user's input Email & Paswword
-        var { first_name, last_name, city, occupation, gender, age, budget, room_type, parking, moved_in_date, lease_term, share_bathroom, share_bedroom, pet, smoking, party, capacity, token } = req.body;
+        var { first_name, last_name, city, occupation, school, major, year_in_school, gender, age, budget, room_type_required, parking_needed, moved_in_date, lease_duration, ok_with_shaing_bathroom, pet_friendly, smoking_friendly, party_friendly, token } = req.body;
 
 
         var decoded = jwtDecode(token);
@@ -17,19 +17,20 @@ module.exports = {
             last_name: last_name,
             city: city,
             occupation: occupation,
+            school: school,
+            major: major,
+            year_in_school: year_in_school,
             gender: gender,
             age: age,
             budget: budget,
-            room_type: room_type,
-            parking: parking,
+            room_type_required: room_type_required,
+            parking_needed: parking_needed,
             moved_in_date: moved_in_date,
-            lease_term: lease_term,
-            share_bathroom: share_bathroom,
-            share_bedroom: share_bedroom,
-            pet: pet,
-            smoking: smoking,
-            party: party,
-            capacity: capacity,
+            lease_duration: lease_duration,
+            ok_with_shaing_bathroom: ok_with_shaing_bathroom,
+            pet_friendly: pet_friendly,
+            smoking_friendly: smoking_friendly,
+            party_friendly: party_friendly,
             user_id: user_id
         });
         await newRoommate.save();
@@ -43,21 +44,21 @@ module.exports = {
 
     getAllRoommatesWithoutAuthenticated: async (req, res, next) => {
         // get user's input room location
-        var { location } = req.body;
+        var { city } = req.body;
 
 
         var allRoommatesWithinLocation = {};
         // if user input location then search by location
-        if (location === "") {
+        if (city === "") {
             allRoommatesWithinLocation = await Roommate.find();
         } else {
-            allRoommatesWithinLocation = await Roommate.find({ "location": location }).select('_id first_name last_name city budget');
+            allRoommatesWithinLocation = await Roommate.find({ "city": city }).select('_id first_name last_name city budget');
         }
 
 
 
         //Respond with token
-        res.status(200).json({ allRoomsWithinLocation });
+        res.status(200).json({ allRoommatesWithinLocation });
     },
 
     // 

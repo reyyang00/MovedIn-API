@@ -5,7 +5,7 @@ module.exports = {
 
     createRoom: async (req, res, next) => {
         // get user's input Email & Paswword
-        var { price, location, furniture, minLeaseDuration, wifi, capacity, token } = req.body;
+        var { price, price_range, gender_prefered, room_type, city, utility_include, cooking, pet, party, smoking, parking, furniture, bathroom, min_lease_duration, move_in_date, token } = req.body;
 
 
         var decoded = jwtDecode(token);
@@ -14,11 +14,20 @@ module.exports = {
         //create a new user
         var newRoom = new Room({
             price: price,
-            location: location,
+            price_range: price_range,
+            gender_prefered: gender_prefered,
+            room_type: room_type,
+            city: city,
+            utility_include: utility_include,
+            cooking: cooking,
+            pet: pet,
+            party: party,
+            smoking: smoking,
+            parking: parking,
             furniture: furniture,
-            minLeaseDuration: minLeaseDuration,
-            wifi: wifi,
-            capacity: capacity,
+            bathroom: bathroom,
+            min_lease_duration: min_lease_duration,
+            move_in_date: move_in_date,
             user_id: user_id
         });
         await newRoom.save();
