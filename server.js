@@ -1,5 +1,6 @@
 var express = require('express');
 var morgan = require('morgan');
+var cors = require('cors')
 var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -12,6 +13,7 @@ var db = mongoose.connect(url, { useNewUrlParser: true });
 
 
 //Middlerwares
+app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
