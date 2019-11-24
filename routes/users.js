@@ -8,7 +8,7 @@ var passportSignIn = passport.authenticate('local', { session: false });
 var passportJWT = passport.authenticate('jwt', { session: false });
 var passportGoogle = passport.authenticate('googleToken', { session: false });
 var facebookToken = passport.authenticate('facebookToken', { session: false });
-var jwtDecode = require('jwt-decode');
+
 
 
 

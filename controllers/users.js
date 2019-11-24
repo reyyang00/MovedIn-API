@@ -1,5 +1,5 @@
 var JWT = require('jsonwebtoken');
-//var UserModel = require('../models/user')
+var UserModel = require('../models/user')
 //var UserProModel= require('../models/user')
 var constants = require('../models/user');
 var { JWS_SECRET } = require('../configuration')
@@ -32,7 +32,7 @@ module.exports = {
     //       res.send('Successful updateUserPro!');
     // },
 
-    
+
     // getAllUserInfo: async (req,res,next)=>{
 
     //    var allusers= await constants.UserProModel.find({});
@@ -43,33 +43,33 @@ module.exports = {
     // },
 
     signUp: async (req, res, next) => {
-            // get user's input Email & Paswword
-            var { email, password } = req.body;
+        // get user's input Email & Paswword
+        var { email, password } = req.body;
 
 
-            // check if there is a user with the same email
-            var foundUser = await constants.UserModel.findOne({ "local.email": email });
-            if (foundUser) {
-                return res.status(403).json({ error: 'Email is already existed' });
+        // check if there is a user with the same email
+        var foundUser = await UserModel.findOne({ "local.email": email });
+        if (foundUser) {
+            return res.status(403).json({ error: 'Email is already existed' });
+        }
+
+        //create a new user
+        var newUser = new constants.UserModel({
+            method: 'local',
+            local: {
+                email: email,
+                password: password
             }
-
-            //create a new user
-            var newUser = new constants.UserModel({
-                method: 'local',
-                local: {
-                    email: email,
-                    password: password
-                }
-            });
-            await newUser.save();
+        });
+        await newUser.save();
 
 
-            //Generate the token
-            var token = signToken(newUser);
-            //Respond with token
-            res.status(200).json({ token });
+        //Generate the token
+        var token = signToken(newUser);
+        //Respond with token
+        res.status(200).json({ token });
 
-        },
+    },
 
 
     signIn: async (req, res, next) => {
