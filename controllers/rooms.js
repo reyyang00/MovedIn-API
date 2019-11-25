@@ -8,6 +8,10 @@ module.exports = {
         var { price, price_range, gender_prefered, room_type, city, utility_include, cooking, pet, party, smoking, parking, furniture, bathroom, min_lease_duration, move_in_date, token } = req.body;
 
 
+        var headerToken = req.headers.authorization;
+        console.log(headerToken);
+
+
         var decoded = jwtDecode(token);
         console.log(decoded.sub);
         var user_id = decoded.sub;
@@ -50,7 +54,7 @@ module.exports = {
         if (location === "") {
             allRoomsWithinLocation = await Room.find();
         } else {
-            allRoomsWithinLocation = await Room.find({ "location": location });
+            allRoomsWithinLocation = await Room.find({ "location": location }).select('_id price room_type city');;
         }
 
         //Respond with token
