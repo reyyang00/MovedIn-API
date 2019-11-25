@@ -5,8 +5,8 @@ module.exports = {
     validateBody: (schema) => {
         return (req, res, next) => {
             var result = Joi.validate(req.body, schema);
-            JSON.stringify(req.body)
-            console.log(req.body);
+            JSON.stringify(req.body);
+
             if (result.error) {
                 // console.log(req.header);
                 // console.log(req.body);
@@ -14,6 +14,7 @@ module.exports = {
                 return res.status(400).json(result.error);
             }
             if (!req.value) { req.valaue = {}; }
+
             req.valaue['body'] = result.value;
             next();
         }
@@ -25,6 +26,7 @@ module.exports = {
             email: Joi.string().email().required(),
             password: Joi.string().required()
         }),
+
 
         roomSchema: Joi.object().keys({
             price: Joi.number().required(),
@@ -69,7 +71,5 @@ module.exports = {
             party_friendly: Joi.string().required().allow('', null),
             token: [Joi.string(), Joi.number()]
         }),
-
-
     }
 }
