@@ -20,6 +20,7 @@ var roommateSchema = new Schema({
 
     occupation: {
         type: String,
+        required: true,
 
     },
     school: {
@@ -36,47 +37,41 @@ var roommateSchema = new Schema({
     },
     gender: {
         type: String,
-        required: true,
+
     },
     age: {
         type: String,
-        required: true,
+
     },
     budget: {
         type: String,
-        required: true,
+
     },
     room_type_required: {
         type: String,
-        required: true
+
     },
     parking_needed: {
         type: String,
-        required: true
+
     },
     moved_in_date: {
         type: String,
-        required: true
     },
     lease_duration: {
         type: String,
-        required: true
     },
     ok_with_shaing_bathroom: {
         type: String,
-        required: true
     },
     pet_friendly: {
         type: String,
-        required: true
     },
     smoking_friendly: {
         type: String,
-        required: true
     },
     party_friendly: {
         type: String,
-        required: true
     },
     user_id: {
         type: String,
