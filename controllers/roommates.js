@@ -7,6 +7,9 @@ module.exports = {
         // get user's input Email & Paswword
         var { first_name, last_name, city, occupation, school, major, year_in_school, gender, age, budget, room_type_required, parking_needed, moved_in_date, lease_duration, ok_with_shaing_bathroom, pet_friendly, smoking_friendly, party_friendly, token } = req.body;
 
+        var headerToken = req.headers.authorization;
+        // console.log(headerToken);
+
 
         var decoded = jwtDecode(token);
         console.log(decoded.sub);
