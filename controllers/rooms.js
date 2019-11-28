@@ -67,28 +67,20 @@ module.exports = {
 
     // 
     getTheRoomsAfterAuthenticated: async (req, res, next) => {
-        // get token from request header
-        var token = req.headers.authorization;
-        console.log('token is: ', req.headers.authorization);
-
-        //decode the token to get the user's id
-        var decoded = jwtDecode(token);
-        console.log('user id: ', decoded.sub);
-        var user_id = decoded.sub;
 
         // get the room id for the details of this room
-        var room_id = req.headers.room_id;
+        var { room_id } = req.body;
         console.log(room_id);
 
 
         var room = await Room.findById(room_id);
 
         //If user doesn't match the room's user_id, handle it
-        var message = '';
-        if (room.user_id !== user_id) {
-            message = 'No authtization to access to this room detail';
-        } else {
+        if (room_id) {
             res.status(200).json({ room });
+
+        } else {
+            res.status(404).json();
         }
     },
 

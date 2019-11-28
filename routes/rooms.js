@@ -21,7 +21,7 @@ router.route('/getrooms')
 
 //  GET API for get the room's details
 router.route('/gettheroom')
-    .get(passportJWT, RoomController.getTheRoomsAfterAuthenticated);
+    .post(passportJWT, validateBody(schemas.roomGetDetialPageSchema), RoomController.getTheRoomsAfterAuthenticated);
 
 //  DELETE API for delete a room document from mongoDB 
 router.route('/deletetheroom')

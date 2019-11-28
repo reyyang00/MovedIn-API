@@ -24,7 +24,7 @@ router.route('/getroommates')
 
 // //  GET API for get the room's details
 router.route('/gettheroommate')
-    .get(passportJWT, RoommateController.getTheDeatialRoommateBeingAuthenticated);
+    .post(passportJWT, validateBody(schemas.roommateGetDetialPageSchema), RoommateController.getTheDeatialRoommateBeingAuthenticated);
 
 // //  DELETE API for delete a room document from mongoDB 
 router.route('/deletetheroommate')

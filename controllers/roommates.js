@@ -68,27 +68,18 @@ module.exports = {
     // 
     getTheDeatialRoommateBeingAuthenticated: async (req, res, next) => {
         // get token from request header
-        var token = req.headers.authorization;
-        console.log('token is: ', req.headers.authorization);
+        console.log('I got here');
+        var { roommate_id } = req.body;
 
-        //decode the token to get the user's id
-        var decoded = jwtDecode(token);
-        console.log('user id: ', decoded.sub);
-        var user_id = decoded.sub;
-
-        // get the roommate id for the details of this room
-        var roommate_id = req.headers.roommate_id;
         console.log(roommate_id);
-
 
         var roommate = await Roommate.findById(roommate_id);
 
         //If user doesn't match the room's user_id, handle it
-        var message = '';
-        if (roommate.user_id !== user_id) {
-            message = 'No authtization to access to this room detail';
-        } else {
+        if (roommate) {
             res.status(200).json({ roommate });
+        } else {
+            res.status(401).json();
         }
     },
 

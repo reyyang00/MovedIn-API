@@ -71,5 +71,11 @@ module.exports = {
             party_friendly: Joi.string().required().allow('', null),
             token: [Joi.string(), Joi.number()]
         }),
+        roommateGetDetialPageSchema: Joi.object().keys({
+            roommate_id: Joi.string().required()
+        }),
+        roomGetDetialPageSchema: Joi.object().keys({
+            roommate_id: Joi.string().required()
+        })
     }
 }
