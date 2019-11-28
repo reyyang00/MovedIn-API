@@ -16,7 +16,7 @@ module.exports = {
     signUp: async (req, res, next) => {
         // get user's input Email & Paswword
         var { email, password } = req.body;
-        console.log(req.body);
+        // console.log(req.body);
         // check if there is a user with the same email
         var foundUser = await User.findOne({ "local.email": email });
 

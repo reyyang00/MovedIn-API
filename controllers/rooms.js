@@ -46,7 +46,8 @@ module.exports = {
 
     getAllRoomsWithoutAuthenticated: async (req, res, next) => {
         // get user's input room location
-        var { location } = req.body;
+        var city = req.headers.authorization;
+        console.log(city);
 
 
         var allRoomsWithinLocation = {};
@@ -54,9 +55,11 @@ module.exports = {
         if (location === "") {
             allRoomsWithinLocation = await Room.find();
         } else {
-            allRoomsWithinLocation = await Room.find({ "location": location }).select('_id price room_type city');;
+            allRoomsWithinLocation = await Room.find({ "city": city }).select('_id price room_type city');;
         }
 
+
+        console.log(allRoomsWithinLocation);
         //Respond with token
         res.status(200).json({ allRoomsWithinLocation });
 

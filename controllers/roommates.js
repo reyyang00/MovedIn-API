@@ -47,7 +47,8 @@ module.exports = {
 
     getAllRoommatesWithoutAuthenticated: async (req, res, next) => {
         // get user's input room location
-        var { city } = req.body;
+        var city = req.headers.authorization;
+
 
 
         var allRoommatesWithinLocation = {};

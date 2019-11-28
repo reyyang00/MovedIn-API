@@ -126,7 +126,6 @@ passport.use('facebookToken', new FacebookTokenStrategy({
 
         console.log('User does not exist in our DB, we are creating a new one ');
 
-
         //If new account
         var newUser = new User({
             method: 'facebook',
