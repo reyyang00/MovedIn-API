@@ -4,6 +4,7 @@ var jwtDecode = require('jwt-decode');
 module.exports = {
 
     createRoommate: async (req, res, next) => {
+      console.log('createRommate API called');
         // get user's input Email & Paswword
         var { first_name, last_name, city, occupation, school, major, year_in_school, gender, age, budget, room_type_required, parking_needed, moved_in_date, lease_duration, ok_with_shaing_bathroom, pet_friendly, smoking_friendly, party_friendly, token } = req.body;
 
@@ -65,7 +66,7 @@ module.exports = {
         res.status(200).json({ allRoommatesWithinLocation });
     },
 
-    // 
+    //
     getTheDeatialRoommateBeingAuthenticated: async (req, res, next) => {
         // get token from request header
         console.log('I got here');
@@ -80,6 +81,39 @@ module.exports = {
             res.status(200).json({ roommate });
         } else {
             res.status(401).json();
+        }
+    },
+
+    getRoommatePostBeingAuthenticated: async (req, res, next) => {
+        // get token from request header
+        var token = req.headers.authorization;
+        console.log('token is: ', req.headers.authorization);
+
+        //decode the token to get the user's id
+        var decoded = jwtDecode(token);
+        console.log('user id: ', decoded.sub);
+        var user_id = decoded.sub;
+
+        // get the roommate id for the details of this room
+        // var roommate_id = req.headers.roommate_id;
+        // console.log(roommate_id);
+
+        var allRoommates = {};
+        // if user input location then search by location
+
+        allRoommates = await Roommate.find({ "user_id": user_id }).select('_id first_name last_name city budget');
+
+
+
+        // var roommate = await Roommate.findById(roommate_id);
+
+        //If user doesn't match the room's user_id, handle it
+        var message = '';
+        if (allRoommates.length===0) {
+            message = 'You have no Roommate Posts';
+            res.status(200).json({ message });
+        } else {
+            res.status(200).json({ allRoommates });
         }
     },
 

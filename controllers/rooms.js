@@ -52,7 +52,7 @@ module.exports = {
 
         var allRoomsWithinLocation = {};
         // if user input location then search by location
-        if (location === "") {
+        if (city === "") {
             allRoomsWithinLocation = await Room.find();
         } else {
             allRoomsWithinLocation = await Room.find({ "city": city }).select('_id price room_type city');;
@@ -65,7 +65,40 @@ module.exports = {
 
     },
 
-    // 
+    getRoomPostBeingAuthenticated: async (req, res, next) => {
+        // get token from request header
+        var token = req.headers.authorization;
+        console.log('token is: ', req.headers.authorization);
+
+        //decode the token to get the user's id
+        var decoded = jwtDecode(token);
+        console.log('user id: ', decoded.sub);
+        var user_id = decoded.sub;
+
+        // get the roommate id for the details of this room
+        // var roommate_id = req.headers.roommate_id;
+        // console.log(roommate_id);
+
+        var allRooms = {};
+        // if user input location then search by location
+
+        allRooms = await Room.find({ "user_id": user_id }).select('_id room_type city price');
+
+
+
+        // var roommate = await Roommate.findById(roommate_id);
+
+        //If user doesn't match the room's user_id, handle it
+        var message = '';
+        if (allRooms.length===0) {
+            message = 'You have no Roommate Posts';
+            res.status(200).json({ message });
+        } else {
+            res.status(200).json({ allRooms });
+        }
+    },
+
+    //
     getTheRoomsAfterAuthenticated: async (req, res, next) => {
 
         // get the room id for the details of this room
