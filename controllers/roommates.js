@@ -111,7 +111,7 @@ module.exports = {
         var message = '';
         if (allRoommates.length===0) {
             message = 'You have no Roommate Posts';
-            res.status(200).json({ message });
+            res.status(200).json({ allRoommates });
         } else {
             res.status(200).json({ allRoommates });
         }
