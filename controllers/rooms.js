@@ -5,7 +5,7 @@ module.exports = {
 
     createRoom: async (req, res, next) => {
         // get user's input Email & Paswword
-        var { price, price_range, gender_prefered, room_type, street, city, utility_include, cooking, pet, party, smoking, parking, furniture, bathroom, min_lease_duration, move_in_date, token } = req.body;
+        var { price, email, price_range, gender_prefered, room_type, street, city, utility_include, cooking, pet, party, smoking, parking, furniture, bathroom, min_lease_duration, move_in_date, token } = req.body;
 
 
         var headerToken = req.headers.authorization;
@@ -18,6 +18,7 @@ module.exports = {
         //create a new user
         var newRoom = new Room({
             price: price,
+            email: email,
             price_range: price_range,
             gender_prefered: gender_prefered,
             room_type: room_type,
@@ -92,7 +93,7 @@ module.exports = {
 
         //If user doesn't match the room's user_id, handle it
         var message = '';
-        if (allRooms.length===0) {
+        if (allRooms.length === 0) {
             message = 'You have no Roommate Posts';
             res.status(200).json({ allRooms });
         } else {

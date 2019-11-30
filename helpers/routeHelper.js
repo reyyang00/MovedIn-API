@@ -30,6 +30,7 @@ module.exports = {
 
         roomSchema: Joi.object().keys({
             price: Joi.number().required(),
+            email: Joi.string().email().required(),
             price_range: Joi.string().required().allow('', null).insensitive().lowercase(),
             gender_prefered: Joi.string().required().allow('', null).insensitive().lowercase(),
             room_type: Joi.string().required().allow('', null).insensitive().lowercase(),

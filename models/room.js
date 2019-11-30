@@ -10,6 +10,11 @@ var roomSchema = new Schema({
     price_range: {
         type: String,
     },
+    email: {
+        type: String,
+        required: true
+
+    },
 
     gender_prefered: {
         type: String,
@@ -19,6 +24,7 @@ var roomSchema = new Schema({
         type: String,
 
     },
+
     street: {
         type: String,
 
@@ -54,16 +60,15 @@ var roomSchema = new Schema({
     },
     furniture: {
         type: String,
-
     },
     bathroom: {
         type: String,
-
     },
+
     min_lease_duration: {
         type: String,
-
     },
+
     move_in_date: {
         type: String,
 
@@ -77,3 +82,4 @@ var roomSchema = new Schema({
 
 var Room = mongoose.model('room', roomSchema);
 module.exports = Room;
+
