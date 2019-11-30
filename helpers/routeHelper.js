@@ -33,6 +33,7 @@ module.exports = {
             price_range: Joi.string().required().allow('', null).insensitive().lowercase(),
             gender_prefered: Joi.string().required().allow('', null).insensitive().lowercase(),
             room_type: Joi.string().required().allow('', null).insensitive().lowercase(),
+            street: Joi.string().required().allow('', null).insensitive().lowercase(),
             city: Joi.string().required().insensitive().lowercase(),
             utility_include: Joi.string().required().allow('', null).insensitive().lowercase(),
             cooking: Joi.string().required().allow('', null).insensitive().lowercase(),

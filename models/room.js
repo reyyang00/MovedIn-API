@@ -19,6 +19,10 @@ var roomSchema = new Schema({
         type: String,
 
     },
+    street: {
+        type: String,
+
+    },
 
     city: {
         type: String,

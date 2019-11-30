@@ -5,7 +5,7 @@ module.exports = {
 
     createRoom: async (req, res, next) => {
         // get user's input Email & Paswword
-        var { price, price_range, gender_prefered, room_type, city, utility_include, cooking, pet, party, smoking, parking, furniture, bathroom, min_lease_duration, move_in_date, token } = req.body;
+        var { price, price_range, gender_prefered, room_type, street, city, utility_include, cooking, pet, party, smoking, parking, furniture, bathroom, min_lease_duration, move_in_date, token } = req.body;
 
 
         var headerToken = req.headers.authorization;
@@ -21,6 +21,7 @@ module.exports = {
             price_range: price_range,
             gender_prefered: gender_prefered,
             room_type: room_type,
+            street: street,
             city: city,
             utility_include: utility_include,
             cooking: cooking,
