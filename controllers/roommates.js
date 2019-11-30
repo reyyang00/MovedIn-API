@@ -101,7 +101,8 @@ module.exports = {
         var allRoommates = {};
         // if user input location then search by location
 
-        allRoommates = await Roommate.find({ "user_id": user_id }).select('_id first_name last_name city budget');
+        allRoommates = await Roommate.find({ "user_id": user_id });
+        //.select('_id first_name last_name city budget')
 
 
 

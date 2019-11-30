@@ -82,7 +82,8 @@ module.exports = {
         var allRooms = {};
         // if user input location then search by location
 
-        allRooms = await Room.find({ "user_id": user_id }).select('_id room_type city price');
+        allRooms = await Room.find({ "user_id": user_id });
+        //.select('_id room_type city price')
 
 
 
