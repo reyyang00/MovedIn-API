@@ -12,21 +12,25 @@ var facebookToken = passport.authenticate('facebookToken', { session: false });
 
 // the POST API for creating a room into our mongoDB
 router.route('/creatroommate')
-    .post(passportJWT, validateBody(schemas.roommateSchema), RoommateController.createRoommate);
+    .post(passportJWT,validateBody(schemas.roommateSchema), RoommateController.createRoommate);
 
 
 
 
 
-// the GET API for get all the rooms without the Token 
+// the GET API for get all the rooms without the Token
 router.route('/getroommates')
     .get(RoommateController.getAllRoommatesWithoutAuthenticated);
+
+// the GET API to fetch all current users' Roommate Posts
+router.route('/getroommatepost')
+  .get(passportJWT,RoommateController.getRoommatePostBeingAuthenticated);
 
 // //  GET API for get the room's details
 router.route('/gettheroommate')
     .post(passportJWT, validateBody(schemas.roommateGetDetialPageSchema), RoommateController.getTheDeatialRoommateBeingAuthenticated);
 
-// //  DELETE API for delete a room document from mongoDB 
+// //  DELETE API for delete a room document from mongoDB
 router.route('/deletetheroommate')
     .delete(passportJWT, RoommateController.deleteTheRoommateBeingAuthenticated);
 
