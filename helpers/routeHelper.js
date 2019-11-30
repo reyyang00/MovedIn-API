@@ -54,6 +54,7 @@ module.exports = {
         roommateSchema: Joi.object().keys({
             first_name: Joi.string().required(),
             last_name: Joi.string().required(),
+            email: Joi.string().email().required(),
             city: Joi.string().required(),
             occupation: Joi.string().required(),
             school: Joi.string().required().allow('', null),
