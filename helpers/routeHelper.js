@@ -78,7 +78,7 @@ module.exports = {
             roommate_id: Joi.string().required()
         }),
         roomGetDetialPageSchema: Joi.object().keys({
-            roommate_id: Joi.string().required()
+            room_id: Joi.string().required()
         })
     }
 }
