@@ -14,8 +14,9 @@ var db = mongoose.connect(url, { useNewUrlParser: true });
 
 //Middlerwares
 app.use(cors({
-    origin: "http://ec2-52-14-225-128.us-east-2.compute.amazonaws.com:3000",
-    credentials: true
+    origin: "http://ec2-52-14-225-128.us-east-2.compute.amazonaws.com",
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
