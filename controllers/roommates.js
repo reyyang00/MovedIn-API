@@ -4,9 +4,9 @@ var jwtDecode = require('jwt-decode');
 module.exports = {
 
     createRoommate: async (req, res, next) => {
-      console.log('createRommate API called');
+        console.log('createRommate API called');
         // get user's input Email & Paswword
-        var { first_name, last_name, city, occupation, school, major, year_in_school, gender, age, budget, room_type_required, parking_needed, moved_in_date, lease_duration, ok_with_shaing_bathroom, pet_friendly, smoking_friendly, party_friendly, token } = req.body;
+        var { first_name, last_name, email, city, occupation, school, major, year_in_school, gender, age, budget, room_type_required, parking_needed, moved_in_date, lease_duration, ok_with_shaing_bathroom, pet_friendly, smoking_friendly, party_friendly, token } = req.body; 
 
         var headerToken = req.headers.authorization;
         // console.log(headerToken);
@@ -19,6 +19,7 @@ module.exports = {
         var newRoommate = new Roommate({
             first_name: first_name,
             last_name: last_name,
+            email: email,
             city: city,
             occupation: occupation,
             school: school,
@@ -110,7 +111,7 @@ module.exports = {
 
         //If user doesn't match the room's user_id, handle it
         var message = '';
-        if (allRoommates.length===0) {
+        if (allRoommates.length === 0) {
             message = 'You have no Roommate Posts';
             res.status(200).json({ allRoommates });
         } else {

@@ -14,7 +14,7 @@ var db = mongoose.connect(url, { useNewUrlParser: true });
 
 //Middlerwares
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "http://ec2-52-14-225-128.us-east-2.compute.amazonaws.com:3000",
     credentials: true
 }));
 app.use(morgan('dev'));
